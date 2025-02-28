@@ -35,10 +35,16 @@ public class AuthenticationService {
 
 
     public JwtTokenDto logIn(LogInDto logInDto) {
-        var usernamePassword = new UsernamePasswordAuthenticationToken(logInDto.getEmail(), logInDto.getPassword());
+        log.info("Attempting login for user: {}", logInDto.getEmail());
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(logInDto.getEmail(), logInDto.getPassword())
+            );
 
-        log.info(usernamePassword);
-        authenticationManager.authenticate(usernamePassword);
+            log.info("Authentication successful for user: {}", logInDto.getEmail());
+        }catch (Exception e) {
+            log.error("Authentication failed for user: {}", logInDto.getEmail(), e);
+        }
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(logInDto.getEmail());
         return new JwtTokenDto(tokenService.generateToken(userDetails));

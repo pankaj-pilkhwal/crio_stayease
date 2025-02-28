@@ -1,10 +1,10 @@
 package com.crio.stay_ease.controller;
 
 import com.crio.stay_ease.entity.Hotel;
-import com.crio.stay_ease.respository.HotelRepository;
 import com.crio.stay_ease.service.HotelService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,15 +25,18 @@ public class HotelController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Hotel> createHotel(@RequestBody Hotel hotel) {
         return new ResponseEntity<>(hotelService.save(hotel), HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasAuthority('MANAGER')")
     @PutMapping("/{hotelId}")
     public ResponseEntity<Hotel> updateHotel(@PathVariable String hotelId, @RequestBody Hotel hotel) {
         return new ResponseEntity<>(hotelService.update(hotelId, hotel), HttpStatus.ACCEPTED);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/{hotelId}")
     public ResponseEntity<Void> deleteHotel(@PathVariable String hotelId) {
         hotelService.delete(hotelId);

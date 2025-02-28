@@ -2,9 +2,12 @@ package com.crio.stay_ease.entity;
 
 import com.crio.stay_ease.util.UserRole;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -12,10 +15,12 @@ import java.util.List;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @Column(nullable = false, unique = true)
@@ -35,11 +40,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return switch (role) {
-            case CUSTOMER -> List.of((GrantedAuthority) ()-> "ROLE_CUSTOMER");
-            case ADMIN -> List.of((GrantedAuthority) ()-> "ROLE_ADMIN");
-            case MANAGER -> List.of((GrantedAuthority) ()-> "ROLE_MANAGER");
-        };
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
 
