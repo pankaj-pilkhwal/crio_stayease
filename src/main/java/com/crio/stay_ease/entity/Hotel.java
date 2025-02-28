@@ -12,7 +12,7 @@ import lombok.Data;
 @Builder
 public class Hotel {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     private String name;

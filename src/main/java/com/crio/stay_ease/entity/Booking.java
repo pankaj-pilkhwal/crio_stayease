@@ -11,7 +11,7 @@ import java.util.Date;
 @Builder
 public class Booking {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     @ManyToOne

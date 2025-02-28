@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/hotels")
 public class BookingController {
     private final BookingService bookingService;
 
@@ -17,7 +18,7 @@ public class BookingController {
         this.bookingService = bookingService;
     }
 
-    @PostMapping("/hotels/{hotelId}/book")
+    @PostMapping("/{hotelId}/book")
     public ResponseEntity<BookingResponseDto> makeBooking(User user, @PathVariable String hotelId) {
         BookingResponseDto booking = bookingService.makeBooking(user, hotelId);
 

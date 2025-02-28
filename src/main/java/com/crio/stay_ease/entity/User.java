@@ -15,7 +15,7 @@ import java.util.List;
 @Builder
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     @Column(nullable = false, unique = true)
@@ -30,7 +30,7 @@ public class User implements UserDetails {
     private String lastName;
 
     @Enumerated(EnumType.STRING)
-    private UserRole role = UserRole.CUSTOMER;
+    private UserRole role;
 
 
     @Override
