@@ -22,7 +22,7 @@ public class BookingService {
     }
 
 
-    public BookingResponseDto makeBooking(User user, String hotelId) {
+    public BookingResponseDto makeBooking(User user, Long hotelId) {
         Hotel hotel = hotelRepository.findById(hotelId).orElseThrow(
                 () -> new NotFoundException("hotel with id: " + hotelId + " not found.")
         );
@@ -53,7 +53,7 @@ public class BookingService {
         }
     }
 
-    public void cancelBooking(String bookingId) {
+    public void cancelBooking(Long bookingId) {
         Booking booking = bookingRepository.findById(bookingId).orElseThrow(
                 () -> new NotFoundException("Booking with bookingId: " + bookingId + " not found")
         );

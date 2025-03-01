@@ -11,7 +11,7 @@ import java.util.Date;
 @Data
 @Builder
 public class BookingResponseDto {
-    String userId;
+    Long userId;
 
     String userName;
 

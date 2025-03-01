@@ -15,8 +15,8 @@ import java.util.Date;
 @Builder
 public class Booking {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     private User user;

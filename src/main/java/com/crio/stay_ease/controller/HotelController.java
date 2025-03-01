@@ -32,13 +32,13 @@ public class HotelController {
 
     @PreAuthorize("hasAuthority('MANAGER')")
     @PutMapping("/{hotelId}")
-    public ResponseEntity<Hotel> updateHotel(@PathVariable String hotelId, @RequestBody Hotel hotel) {
+    public ResponseEntity<Hotel> updateHotel(@PathVariable Long hotelId, @RequestBody Hotel hotel) {
         return new ResponseEntity<>(hotelService.update(hotelId, hotel), HttpStatus.ACCEPTED);
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/{hotelId}")
-    public ResponseEntity<Void> deleteHotel(@PathVariable String hotelId) {
+    public ResponseEntity<Void> deleteHotel(@PathVariable Long hotelId) {
         hotelService.delete(hotelId);
         return ResponseEntity.noContent().build();
     }

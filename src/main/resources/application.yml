@@ -9,10 +9,12 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:mysql://localhost:3306/crio_stay_ease
-    username: root
-    password: root@123
+    url: jdbc:mysql://mysql-crio-stay-ease-crio-stay-ease.l.aivencloud.com:22168/aiven-crio-stay-ease
+    username: avnadmin
     driver-class-name: com.mysql.cj.jdbc.Driver
   output:
     ansi:
       enabled: always
+  data:
+    rest:
+      base-path: /api/v1/crio_stay_ease

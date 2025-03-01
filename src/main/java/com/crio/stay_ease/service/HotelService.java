@@ -24,7 +24,7 @@ public class HotelService {
         return hotelRepository.save(hotel);
     }
 
-    public Hotel update(String hotelId, Hotel hotel) {
+    public Hotel update(Long hotelId, Hotel hotel) {
         hotelRepository.findById(hotelId).orElseThrow(
                 ()-> new NotFoundException("hotel with hotelId: " + hotelId + " not found.")
         );
@@ -33,7 +33,7 @@ public class HotelService {
         return hotelRepository.save(hotel);
     }
 
-    public void delete(String hotelId) {
+    public void delete(Long hotelId) {
         hotelRepository.deleteById(hotelId);
     }
 }

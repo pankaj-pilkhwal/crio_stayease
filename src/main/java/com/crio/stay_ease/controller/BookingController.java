@@ -20,7 +20,7 @@ public class BookingController {
     }
 
     @PostMapping("/{hotelId}/book")
-    public ResponseEntity<BookingResponseDto> makeBooking(User user, @PathVariable String hotelId) {
+    public ResponseEntity<BookingResponseDto> makeBooking(User user, @PathVariable Long hotelId) {
         BookingResponseDto booking = bookingService.makeBooking(user, hotelId);
 
         return new ResponseEntity<>(booking, HttpStatus.CREATED);
@@ -28,7 +28,7 @@ public class BookingController {
 
     @PreAuthorize("hasAuthority('MANAGER')")
     @DeleteMapping("/bookings/{bookingId}")
-    public ResponseEntity<Void> cancelBooking(@PathVariable String bookingId) {
+    public ResponseEntity<Void> cancelBooking(@PathVariable Long bookingId) {
         bookingService.cancelBooking(bookingId);
         return ResponseEntity.noContent().build();
     }
