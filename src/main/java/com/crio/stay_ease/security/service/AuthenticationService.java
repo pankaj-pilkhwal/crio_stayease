@@ -8,9 +8,11 @@ import com.crio.stay_ease.security.dto.LogInDto;
 import com.crio.stay_ease.security.dto.SignUpDto;
 import com.crio.stay_ease.security.dto.SignUpResponseDto;
 import com.crio.stay_ease.util.UserRole;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,20 +20,13 @@ import org.springframework.stereotype.Service;
 
 @Log4j2
 @Service
+@RequiredArgsConstructor
 public class AuthenticationService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final TokenService tokenService;
     private final UserDetailsService userDetailsService;
     private final AuthenticationManager authenticationManager;
-
-    public AuthenticationService(UserRepository userRepository, PasswordEncoder passwordEncoder, TokenService tokenService, UserDetailsService userDetailsService, AuthenticationManager authenticationManager) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.tokenService = tokenService;
-        this.userDetailsService = userDetailsService;
-        this.authenticationManager = authenticationManager;
-    }
 
 
     public JwtTokenDto logIn(LogInDto logInDto) {
@@ -42,7 +37,7 @@ public class AuthenticationService {
             );
 
             log.info("Authentication successful for user: {}", logInDto.getEmail());
-        }catch (Exception e) {
+        }catch (AuthenticationException e) {
             log.error("Authentication failed for user: {}", logInDto.getEmail(), e);
         }
 

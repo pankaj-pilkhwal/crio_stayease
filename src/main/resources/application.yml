@@ -11,6 +11,9 @@ spring:
   datasource:
     url: jdbc:mysql://mysql-crio-stay-ease-crio-stay-ease.l.aivencloud.com:22168/aiven-crio-stay-ease
     username: avnadmin
+#    url: jdbc:mysql://localhost:3306/crio_stay_ease
+#    username: root
+    password: root@123
     driver-class-name: com.mysql.cj.jdbc.Driver
   output:
     ansi:
